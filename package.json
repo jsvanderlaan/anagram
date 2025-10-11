@@ -1,32 +1,36 @@
 {
-  "name": "anagram",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/common": "^19.2.0",
-    "@angular/compiler": "^19.2.0",
-    "@angular/core": "^19.2.0",
-    "@angular/forms": "^19.2.0",
-    "@angular/platform-browser": "^19.2.0",
-    "@angular/platform-browser-dynamic": "^19.2.0",
-    "@angular/router": "^19.2.0",
-    "@tailwindcss/postcss": "^4.1.14",
-    "postcss": "^8.5.6",
-    "rxjs": "~7.8.0",
-    "tailwindcss": "^4.1.14",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.5",
-    "@angular/cli": "^19.2.5",
-    "@angular/compiler-cli": "^19.2.0",
-    "typescript": "~5.7.2"
-  }
+    "name": "anagram",
+    "version": "0.0.0",
+    "scripts": {
+        "ng": "ng",
+        "start": "concurrently --kill-others \"npm run start:go\" \"ng serve\"",
+        "start:go": "nodemon -e go -x \"npm run build:go\"",
+        "build": "npm run build:go && ng build",
+        "build:go": "env GOOS=js GOARCH=wasm go build -o ./public/main.wasm",
+        "watch": "ng build --watch --configuration development"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/common": "^19.2.0",
+        "@angular/compiler": "^19.2.0",
+        "@angular/core": "^19.2.0",
+        "@angular/forms": "^19.2.0",
+        "@angular/platform-browser": "^19.2.0",
+        "@angular/platform-browser-dynamic": "^19.2.0",
+        "@angular/router": "^19.2.0",
+        "@tailwindcss/postcss": "^4.1.14",
+        "rxjs": "~7.8.0",
+        "tslib": "^2.3.0",
+        "zone.js": "~0.15.0"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^19.2.5",
+        "@angular/cli": "^19.2.5",
+        "postcss": "^8.5.6",
+        "@angular/compiler-cli": "^19.2.0",
+        "tailwindcss": "^4.1.14",
+        "concurrently": "^8.2.0",
+        "prettier": "3.4.1",
+        "typescript": "~5.7.2"
+    }
 }
