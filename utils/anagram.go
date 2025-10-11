@@ -24,7 +24,7 @@ type Anagram struct {
 // non-decreasing candidate index order to avoid generating different permutations of the same combination.
 func FindAnagrams(input string, wordFreq map[string]float32, maxResults int) ([]Anagram, error) {
 	// --- normalize input: keep only a-z ASCII letters, lowercase
-	normIn := normalizeASCIIletters(input)
+	normIn := NormalizeASCIIletters(input)
 	if len(normIn) == 0 {
 		return nil, fmt.Errorf("input contains no a-z letters after normalization")
 	}
@@ -40,7 +40,7 @@ func FindAnagrams(input string, wordFreq map[string]float32, maxResults int) ([]
 	}
 	cands := make([]cand, 0, len(wordFreq))
 	for w, f := range wordFreq {
-		nw := normalizeASCIIletters(w)
+		nw := NormalizeASCIIletters(w)
 		if nw == "" {
 			continue
 		}
@@ -173,7 +173,7 @@ func FindAnagrams(input string, wordFreq map[string]float32, maxResults int) ([]
 // -------------------- helpers --------------------
 
 // normalizeASCIIletters returns a lower-case a-z-only string (drops all other characters).
-func normalizeASCIIletters(s string) string {
+func NormalizeASCIIletters(s string) string {
 	var b strings.Builder
 	b.Grow(len(s))
 	for i := 0; i < len(s); i++ {

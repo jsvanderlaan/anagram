@@ -29,9 +29,13 @@ func anagram(this js.Value, args []js.Value) interface{} {
 
 	fmt.Println("Finding anagrams for:", input)
 	fmt.Println("Using  word list with", len(words), "characters")
+	inputWords := strings.Fields(input)
+	for i := 0; i < len(inputWords); i++ {
+		inputWords[i] = utils.NormalizeASCIIletters(inputWords[i])
+	}
 
 	freq_dict := make(map[string]float32)
-	// remove \r for web usage
+
 	words = strings.ReplaceAll(words, "\r", "")
 	word_freq := strings.Split(words, "\n")
 	for _, wf := range word_freq {
@@ -46,9 +50,14 @@ func anagram(this js.Value, args []js.Value) interface{} {
 		}
 	}
 
+	for _, word := range inputWords {
+		word = strings.ToUpper(word)
+		delete(freq_dict, word)
+	}
+
 	fmt.Println("Loaded", len(freq_dict), "words")
 
-	output := utils.FastAnagrams(input, freq_dict, 2000, 3)
+	output := utils.FastAnagrams(input, freq_dict, 2000, 4)
 
 	fmt.Println("Found", len(output), "anagrams")
 

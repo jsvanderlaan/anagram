@@ -16,7 +16,7 @@ type wordData struct {
 // FastAnagrams finds multi-word anagrams efficiently.
 // It limits depth to maxWords (e.g. 3) to reduce combinatorial explosion.
 func FastAnagrams(input string, wordFreq map[string]float32, maxResults int, maxWords int) []Anagram {
-	input = normalizeASCIIletters(input)
+	input = NormalizeASCIIletters(input)
 	if len(input) == 0 {
 		return nil
 	}
@@ -26,7 +26,7 @@ func FastAnagrams(input string, wordFreq map[string]float32, maxResults int, max
 
 	cands := make([]wordData, 0, len(wordFreq))
 	for w, f := range wordFreq {
-		nw := normalizeASCIIletters(w)
+		nw := NormalizeASCIIletters(w)
 		if nw == "" {
 			continue
 		}

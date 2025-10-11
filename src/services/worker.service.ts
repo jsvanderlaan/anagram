@@ -25,14 +25,7 @@ export class WorkerService {
                     this._answers.loading.set(true);
                     return from(
                         this._execute('anagram', {
-                            input: next.input
-                                .toUpperCase()
-                                .normalize('NFD')
-                                .replace(/[^\w\s]|\d|_/g, '')
-                                .replace(/\s+/g, '')
-                                .split('')
-                                .sort()
-                                .join(''),
+                            input: next.input,
                             lang,
                         })
                     );
