@@ -1,0 +1,14 @@
+<div class="flex gap-1">
+    @for (lang of languages; track lang) {
+    <button
+        [ngClass]="{
+                grayscale: lang !== language.language(),
+            }"
+        class="w-8 h-8"
+        [value]="lang"
+        (click)="onLanguageChange(lang)"
+    >
+        <img attr.src="./{{ lang }}.svg" />
+    </button>
+    }
+</div>
