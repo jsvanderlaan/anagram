@@ -28,6 +28,8 @@ addEventListener(
                 words[payload.lang] = await (await fetch(`./woorden/answers_${payload.lang}.txt`)).text();
             }
 
+            console.log('Word length:', words[payload.lang].length);
+
             const result = (self as any).anagram(payload.input, words[payload.lang]);
             postMessage({ status: 'completed', result });
         } catch (error: any) {

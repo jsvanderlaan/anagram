@@ -28,6 +28,7 @@ func anagram(this js.Value, args []js.Value) interface{} {
 	}
 
 	fmt.Println("Finding anagrams for:", input)
+	fmt.Println("Using  word list with", len(words), "characters")
 
 	freq_dict := make(map[string]float32)
 	word_freq := strings.Split(words, "\r\n")
