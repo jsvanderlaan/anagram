@@ -1,59 +1,18 @@
 # Anagram
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+This project is an Angular-based application designed to explore and solve anagrams. It includes features for selecting languages, viewing answers, and interacting with a web worker for efficient processing.
 
-## Development server
+## Features
 
-To start a local development server, run:
+-   **Language Selection**: Choose between supported languages (e.g., English and Dutch).
+-   **Anagram Solver**: View and interact with anagram solutions.
+-   **Web Worker Integration**: Offload heavy computations to a web worker for better performance.
 
-```bash
-ng serve
-```
+## Project Structure
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+-   `src/`: Contains the main application code.
+    -   `app/`: Core application components and configuration.
+    -   `answers/`: Components related to displaying anagram answers.
+    -   `language/`: Components for language selection.
+    -   `services/`: Angular services for managing application logic.
+-   `public/`: Static assets such as icons and language files.

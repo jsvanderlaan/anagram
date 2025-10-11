@@ -25,6 +25,7 @@ export class AppComponent {
         const params = new URLSearchParams(window.location.search);
         const q = params.get('q');
         if (q) {
+            document.querySelector('meta[property="og:title"]')?.setAttribute('content', `Anagrammen voor ${q}`);
             this.searchText = q;
         }
         const lang = params.get('lang') as any;
@@ -41,6 +42,7 @@ export class AppComponent {
         } else if (sa === '0') {
             this.sa = false;
         }
+
         this._sub.add(this._lang.onLanguageChange.subscribe(() => this.onSearch()));
         this.onSearch();
     }
