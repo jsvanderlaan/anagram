@@ -42,17 +42,24 @@ func anagram(this js.Value, args []js.Value) interface{} {
 			}
 		}
 	}
+
+	fmt.Println("Loaded", len(freq_dict), "words")
+
 	output := utils.FastAnagrams(input, freq_dict, 1000, 3)
 
-	uniqueWords := make(map[string]struct{})
+	fmt.Println("Found", len(output), "anagrams")
+
+	uniqueWords := make(map[string]utils.Anagram)
 	for i := 0; i < len(output); i++ {
 		str := "\"" + strings.Join(output[i].Words, " ") + "\""
-		uniqueWords[str] = struct{}{}
+		uniqueWords[str] = output[i]
 	}
 	output = make([]utils.Anagram, 0, len(uniqueWords))
-	for k := range uniqueWords {
-		output = append(output, utils.Anagram{Words: strings.Split(k[1:len(k)-1], " "), Score: 0})
+	for _, v := range uniqueWords {
+		output = append(output, v)
 	}
+
+	fmt.Println("Filtered to", len(output), "unique anagrams")
 
 	for i := 0; i < len(output); i++ {
 		var score float32
@@ -71,11 +78,14 @@ func anagram(this js.Value, args []js.Value) interface{} {
 		return output[i].Score > output[j].Score
 	})
 
-	fmt.Println("Processed in", time.Since(start))
 	jsArray := js.ValueOf(make([]interface{}, len(output)))
 	for i, v := range output {
 		str := "\"" + strings.Join(v.Words, " ") + "\""
 		jsArray.SetIndex(i, str)
 	}
+
+	fmt.Println("Outputting", len(output), "anagrams")
+
+	fmt.Println("Processed in", time.Since(start))
 	return jsArray
 }

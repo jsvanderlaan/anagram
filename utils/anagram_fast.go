@@ -134,7 +134,8 @@ func searchAnagrams(cands *[]wordData, idx int, remaining [26]uint8, usedMask ui
 
 		// Recurse with word added
 		newPhrase := append(phrase, c.word)
-		searchAnagrams(cands, i, newRem, usedMask|c.mask, newPhrase, score+c.score, depth+1, maxDepth, out, maxResults)
+		avgScore := (score + c.score) / float32(len(newPhrase))
+		searchAnagrams(cands, i, newRem, usedMask|c.mask, newPhrase, avgScore, depth+1, maxDepth, out, maxResults)
 
 		if maxResults > 0 && len(*out) >= maxResults {
 			return
