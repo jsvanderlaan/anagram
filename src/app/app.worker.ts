@@ -6,7 +6,7 @@ addEventListener('message', async ({ data }) => {
     // time
     console.time('worker');
     const language: Language = data.lang;
-    const original = data.input.toUpperCase().trim().replace(/\s+/g, '').split('').sort();
+    const original = data.input.toUpperCase().normalize('NFD').replace(/[^\w\s]|\d|_/g, '').replace(/\s+/g, '').split('').sort();
     const wordLength = original.length;
 
     if (wordLength < 2) {
