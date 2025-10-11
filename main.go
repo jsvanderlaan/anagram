@@ -48,7 +48,7 @@ func anagram(this js.Value, args []js.Value) interface{} {
 
 	fmt.Println("Loaded", len(freq_dict), "words")
 
-	output := utils.FastAnagrams(input, freq_dict, 1000, 3)
+	output := utils.FastAnagrams(input, freq_dict, 2000, 3)
 
 	fmt.Println("Found", len(output), "anagrams")
 
@@ -72,13 +72,13 @@ func anagram(this js.Value, args []js.Value) interface{} {
 		output[i].Score = score
 	}
 	sort.Slice(output, func(i, j int) bool {
-		if output[i].Score == output[j].Score {
-			if len(output[i].Words) == len(output[j].Words) {
+		if len(output[i].Words) == len(output[j].Words) {
+			if output[i].Score == output[j].Score {
 				return strings.Join(output[i].Words, " ") < strings.Join(output[j].Words, " ")
 			}
-			return len(output[i].Words) < len(output[j].Words)
+			return output[i].Score > output[j].Score
 		}
-		return output[i].Score > output[j].Score
+		return len(output[i].Words) < len(output[j].Words)
 	})
 
 	jsArray := js.ValueOf(make([]interface{}, len(output)))
