@@ -31,7 +31,9 @@ func anagram(this js.Value, args []js.Value) interface{} {
 	fmt.Println("Using  word list with", len(words), "characters")
 
 	freq_dict := make(map[string]float32)
-	word_freq := strings.Split(words, "\r\n")
+	// remove \r for web usage
+	words = strings.ReplaceAll(words, "\r", "")
+	word_freq := strings.Split(words, "\n")
 	for _, wf := range word_freq {
 		parts := strings.Split(wf, ",")
 
