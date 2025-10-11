@@ -5,6 +5,7 @@ import { AnswersComponent } from '../answers/answers.component';
 import { LanguageComponent } from '../language/language.component';
 import { LanguageService } from '../services/language.service';
 import { WorkerService } from '../services/worker.service';
+import { Language } from '../types';
 
 @Component({
     selector: 'app-root',
@@ -17,13 +18,28 @@ export class AppComponent {
     private readonly _lang = inject(LanguageService);
 
     searchText = '';
+    highlight = '';
+    sa: boolean | null = null;
 
     ngOnInit(): void {
-        // get query parameter 'q' and set it to searchText
         const params = new URLSearchParams(window.location.search);
         const q = params.get('q');
         if (q) {
             this.searchText = q;
+        }
+        const lang = params.get('lang') as any;
+        if (lang && Object.values<string>(Language).includes(lang)) {
+            this._lang.set(lang);
+        }
+        const highlight = params.get('highlight');
+        if (highlight) {
+            this.highlight = highlight;
+        }
+        const sa = params.get('sa');
+        if (sa === '1') {
+            this.sa = true;
+        } else if (sa === '0') {
+            this.sa = false;
         }
         this._sub.add(this._lang.onLanguageChange.subscribe(() => this.onSearch()));
         this.onSearch();

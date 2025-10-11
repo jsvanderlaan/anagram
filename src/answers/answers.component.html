@@ -1,35 +1,33 @@
-@if (answers.list(); as list) {
-    <div class="text-center font-bold mt-4">
-        Resultaat
-        @if (!answers.loading()) {
-            <!-- prettier-ignore -->
-            <span class="text-sm font-normal text-gray-500">(@if (list.length > previewSize && !showAll()) {{{ previewSize }}/}{{ list.length }})</span>
-        }
-    </div>
-    @if (answers.loading()) {
-        <div class="text-center">momentje...</div>
-    } @else {
-        <div class="flex flex-row flex-wrap gap-2 mt-2 justify-center text-center text-xs font-mono">
-            @for (p of showAll() ? list : preview(); track p) {
-                <div>{{ p }}</div>
-            }
-            @if (list.length > previewSize && !showAll()) {
-                <div>...</div>
-            }
-        </div>
-        @if (list.length > previewSize) {
-            <div class="flex flex-col items-center mt-2">
-                <button
-                    class="text-center text-xs border border-black rounded-xl px-2 py-1 shadow-xl"
-                    (click)="showAll.set(!showAll())"
-                >
-                    @if (showAll()) {
-                        Minder...
-                    } @else {
-                        Meer...
-                    }
-                </button>
-            </div>
-        }
+@if (answers.list(); as list) { @if(list.length > 0) {
+<div class="text-center font-bold mt-4">
+    Resultaat @if (!answers.loading()) {
+    <span class="text-sm font-normal text-gray-500"
+        >(@if (list.length > previewSize && !showAll()) {{{ previewSize }}/}{{ list.length }})</span
+    >
     }
-}
+</div>
+@if (answers.loading()) {
+<div class="text-center">momentje...</div>
+} @else {
+<div class="flex flex-row flex-wrap gap-2 mt-2 justify-center text-center text-xs font-mono">
+    @for (p of showAll() ? list : preview(); track p) {
+    <div
+        (click)="copyUrl(p); showCopiedMessage(p)"
+        class="cursor-pointer hover:font-bold"
+        [ngClass]="{ 'bg-yellow-200': p === wordToHighlight() }"
+    >
+        {{ p }}
+    </div>
+    } @if (list.length > previewSize && !showAll()) {
+    <div>...</div>
+    }
+</div>
+@if (list.length > previewSize) {
+<div class="flex flex-col items-center mt-2">
+    <button class="text-center text-xs border border-black rounded-xl px-2 py-1 shadow-xl" (click)="showAll.set(!showAll())">
+        @if (showAll()) { Minder... } @else { Meer... }
+    </button>
+</div>
+} } } @if(copiedUrl()){
+<div class="fixed top-0 left-0 w-full bg-green-500 text-white text-center py-2 shadow-md">URL gekopieerd!</div>
+} }
