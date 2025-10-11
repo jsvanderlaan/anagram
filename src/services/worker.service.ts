@@ -62,6 +62,7 @@ export class WorkerService {
 
             worker.onmessage = ({ data }) => {
                 const { status, result, error } = data;
+                console.log(data);
                 if (status === 'completed') {
                     resolve(result);
                 } else if (status === 'error') {
