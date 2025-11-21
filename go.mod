@@ -1,6 +1,6 @@
 module anagram.jurre.dev
 
-go 1.19
+go 1.24.2
 
 require (
 	github.com/kelindar/bitmap v1.5.0

@@ -6,6 +6,7 @@
         "start": "concurrently --kill-others \"npm run start:go\" \"ng serve\"",
         "start:go": "nodemon -e go -x \"npm run build:go\"",
         "build": "npm run build:go && ng build",
+        "build:angular": "ng build --configuration production",
         "build:go": "env GOOS=js GOARCH=wasm go build -o ./public/main.wasm",
         "watch": "ng build --watch --configuration development"
     },
